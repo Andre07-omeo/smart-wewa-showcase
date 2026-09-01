@@ -6,15 +6,15 @@ import { ButtonLink, Carousel, Eyebrow, SectionHeading, Shell, TrustBar } from '
 // ========== HERO SLIDES ==========
 const heroSlides = [
   {
-    image: '/images/hero-rider.jpg',
+    image: '/images/hero-rider.jpeg',
     kicker: 'La référence des motards de Kinshasa',
-    title: 'La route est à nous, la sécurité est notre priorité.',
+    title: 'La Route est à nous, la Sécurité est notre Priorité.',
     text: 'Des équipements certifiés, des conseils de terrain et une communauté soudée pour que chaque trajet soit un retour assuré.'
   },
   {
     image: '/images/community-riders.jpg',
     kicker: 'Une communauté qui se protège',
-    title: 'Smart wewa, c\'est la garantie de rouler en confiance.',
+    title: 'Smart Wewa, c\'est la garantie de rouler en confiance.',
     text: 'Retrouvez les bons plans, les rendez-vous et les réflexes qui font la différence sur les routes de Kinshasa.'
   },
 ];
@@ -558,13 +558,11 @@ function Newsletter() {
     <section className="bg-[#e9edf2]">
       <div className="container-wide flex flex-col justify-between gap-7 py-12 md:flex-row md:items-center">
         <div>
-          <Eyebrow>Le carnet de route</Eyebrow>
           <h2 className="font-display text-2xl font-bold tracking-[-.04em] md:text-3xl">Les bons réflexes, directement dans votre boîte.</h2>
         </div>
         {done ? (
           <p className="flex items-center gap-2 text-sm font-bold text-[#25724b]">
-            <Check size={17} /> Bienvenue dans le carnet.
-          </p>
+c:\Users\omeon\Downloads\Moto_Gilet_Rouge_Fidele_4K (2).png          </p>
         ) : (
           <form onSubmit={(e) => { e.preventDefault(); setDone(true); }} className="flex w-full max-w-md gap-2">
             <input required type="email" placeholder="Votre adresse email" className="min-w-0 flex-1 rounded-lg border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary" data-testid="input-newsletter-email" />

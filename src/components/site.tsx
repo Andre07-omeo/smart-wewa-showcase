@@ -1,7 +1,6 @@
 import { type ReactNode, useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { ArrowRight, ChevronLeft, ChevronRight, Clock3, Facebook, Instagram, MapPin, Menu, Phone, Play, Search, ShieldCheck, Sparkles, Star, X, Youtube } from 'lucide-react';
-
+import { ArrowRight, ChevronLeft, ChevronRight, Clock3, Facebook, Instagram, MapPin, Menu, Phone, Play, Search, ShieldCheck, Sparkles, Star, X, Youtube, Mail } from 'lucide-react';
 export const navItems = [
   { href: '/', label: 'Accueil' },
   { href: '/equipements', label: 'Équipements' },
@@ -9,12 +8,12 @@ export const navItems = [
   { href: '/contact', label: 'Contact' },
 ];
 
-export function Logo({ 
-  inverse = false, 
+export function Logo({
+  inverse = false,
   size = 'normal',
-  variant = 'default' 
-}: { 
-  inverse?: boolean; 
+  variant = 'default'
+}: {
+  inverse?: boolean;
   size?: 'small' | 'normal' | 'large' | 'xlarge';
   variant?: 'default' | 'white';
 }) {
@@ -24,15 +23,15 @@ export function Logo({
     large: 'h-28',
     xlarge: 'h-36'
   };
-  
+
   // Deux logos différents
-  const logoSrc = variant === 'white' ? '/images/logo4.png' : '/images/logof.png';
-  
+  const logoSrc = variant === 'white' ? '/images/logo.png' : '/images/logo.png';
+
   return (
     <Link href="/" className="flex items-center gap-3 group" data-testid="link-logo">
-      <img 
-        src={logoSrc} 
-        alt="Smart Wewa" 
+      <img
+        src={logoSrc}
+        alt="Smart Wewa"
         className={`${sizeClasses[size]} w-auto object-contain transition-transform duration-300 group-hover:scale-105`}
       />
     </Link>
@@ -47,6 +46,7 @@ export function Header() {
       <div className="container-wide flex h-[84px] items-center justify-between">
         {/* Logo principal - version default */}
         <Logo size="normal" variant="default" />
+
         <nav className="hidden items-center gap-7 md:flex" aria-label="Navigation principale">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} data-testid={`link-nav-${item.label.toLowerCase().replace(/ /g, '-')}`} className={`relative py-2 text-[13px] font-semibold transition-colors hover:text-primary ${location === item.href ? 'text-primary' : 'text-muted-foreground'}`}>
@@ -55,23 +55,48 @@ export function Header() {
             </Link>
           ))}
         </nav>
+
         <div className="hidden items-center gap-3 md:flex">
           <a href="tel:+243812345678" className="flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-primary" data-testid="link-header-phone">
             <Phone size={14} /> +243 81 234 56 78
           </a>
-          {/* Logo blanc à droite (inverse) */}
-          <Logo inverse size="normal" variant="white" />
+
+          {/* Bouton Login avec fond bleu */}
+          <a
+            href="https://votre-site-externe.com/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-primary px-5 py-2.5 text-xs font-bold text-primary-foreground shadow-[0_8px_20px_rgba(28,61,133,.18)] transition-all duration-300 hover:bg-[#163267] hover:-translate-y-0.5 hover:shadow-lg"
+            data-testid="link-header-login"
+          >
+            Se connecter
+          </a>
         </div>
+
         <button type="button" className="grid h-10 w-10 place-items-center rounded-lg border border-border md:hidden" onClick={() => setOpen(!open)} aria-label="Ouvrir le menu" data-testid="button-menu">
           {open ? <X size={19} /> : <Menu size={19} />}
         </button>
       </div>
+
       {open && (
         <nav className="border-t border-border bg-background px-5 py-4 md:hidden" aria-label="Navigation mobile">
-          {navItems.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="block border-b border-border/60 py-3 text-sm font-semibold" data-testid={`link-mobile-${item.label.toLowerCase().replace(/ /g, '-')}`}>{item.label}</Link>)}
-          {/* Logo en bas du menu mobile */}
-          <div className="mt-4 flex justify-center">
-            <Logo size="large" variant="default" />
+          {navItems.map((item) => (
+            <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="block border-b border-border/60 py-3 text-sm font-semibold" data-testid={`link-mobile-${item.label.toLowerCase().replace(/ /g, '-')}`}>
+              {item.label}
+            </Link>
+          ))}
+
+          {/* Bouton Login dans le menu mobile */}
+          <div className="mt-4 flex flex-col gap-3">
+            <a
+              href="https://votre-site-externe.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-lg bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground shadow-[0_8px_20px_rgba(28,61,133,.18)] transition-all hover:bg-[#163267]"
+              data-testid="link-mobile-login"
+            >
+              Se connecter
+            </a>
           </div>
         </nav>
       )}
@@ -82,34 +107,117 @@ export function Header() {
 export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container-wide grid gap-10 py-14 md:grid-cols-[1.35fr_.8fr_.8fr_1fr]">
+      {/* ===== SECTION PRINCIPALE DU FOOTER ===== */}
+      <div className="container-wide grid gap-10 py-16 md:grid-cols-[1.4fr_.8fr_.8fr_1fr]">
+
+        {/* COLONNE 1 - Présentation */}
         <div>
-          {/* Logo blanc dans le footer */}
-          <Logo inverse size="xlarge" variant="white" />
-          <p className="mt-5 max-w-xs text-sm leading-6 text-primary-foreground/70">La référence des motards de Kinshasa. De bons équipements, de bonnes infos, et une communauté qui veille les uns sur les autres.</p>
+          <div className="flex items-center gap-3">
+            <span className="font-display text-xl font-bold tracking-tight text-white">
+              <span className="text-accent">●</span> Ensemble sur la route
+            </span>
+            <span className="h-6 w-px bg-primary-foreground/20" />
+            <span className="text-xs font-medium uppercase tracking-wider text-primary-foreground/50">
+              Kinshasa
+            </span>
+          </div>
+          <p className="mt-5 max-w-xs text-sm leading-6 text-primary-foreground/75">
+            La communauté des motards de Kinshasa qui roulent protégés.
+            Équipements, conseils et solidarité pour des trajets en toute sécurité.
+          </p>
           <div className="mt-6 flex gap-2">
-            {[{ label: 'Facebook', icon: Facebook }, { label: 'Instagram', icon: Instagram }, { label: 'YouTube', icon: Youtube }].map(({ label, icon: Icon }) => <a key={label} href="#" aria-label={label} className="grid h-9 w-9 place-items-center rounded-full border border-primary-foreground/20 transition-colors hover:bg-accent" data-testid={`link-footer-${label.toLowerCase()}`}><Icon size={15} /></a>)}
+            {[{ label: 'Facebook', icon: Facebook }, { label: 'Instagram', icon: Instagram }, { label: 'YouTube', icon: Youtube }].map(({ label, icon: Icon }) => (
+              <a
+                key={label}
+                href="#"
+                aria-label={label}
+                className="grid h-10 w-10 place-items-center rounded-full border border-primary-foreground/20 transition-all duration-300 hover:bg-accent hover:border-accent hover:scale-105 hover:shadow-lg"
+                data-testid={`link-footer-${label.toLowerCase()}`}
+              >
+                <Icon size={16} className="transition-transform duration-300 group-hover:scale-110" />
+              </a>
+            ))}
           </div>
         </div>
-        <div><p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Découvrir</p>{navItems.slice(1, 4).map((item) => <Link key={item.href} href={item.href} className="mb-3 block text-sm text-primary-foreground/70 hover:text-white" data-testid={`link-footer-nav-${item.label}`}>{item.label}</Link>)}</div>
-        <div><p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Le terrain</p><p className="mb-3 text-sm text-primary-foreground/70">Conseils sécurité</p><p className="mb-3 text-sm text-primary-foreground/70">Points relais</p><p className="mb-3 text-sm text-primary-foreground/70">Devenir partenaire</p></div>
+
+        {/* COLONNE 2 - Navigation */}
         <div>
-          <p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Nous trouver</p>
-          <div className="mb-3 flex gap-2 text-sm text-primary-foreground/70">
-            <MapPin size={15} className="mt-0.5 shrink-0 text-accent" /> Kinshasa, République démocratique du Congo
+          <p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Découvrir</p>
+          <ul className="space-y-2.5">
+            {navItems.slice(1, 4).map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="block text-sm text-primary-foreground/70 transition-all duration-300 hover:text-white hover:translate-x-1"
+                  data-testid={`link-footer-nav-${item.label}`}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* COLONNE 3 - Services */}
+        <div>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Nos services</p>
+          <ul className="space-y-2.5">
+            <li><a href="#" className="block text-sm text-primary-foreground/70 transition-all duration-300 hover:text-white hover:translate-x-1">Conseils sécurité</a></li>
+            <li><a href="#" className="block text-sm text-primary-foreground/70 transition-all duration-300 hover:text-white hover:translate-x-1">Points relais</a></li>
+            <li><a href="#" className="block text-sm text-primary-foreground/70 transition-all duration-300 hover:text-white hover:translate-x-1">Devenir partenaire</a></li>
+            <li><a href="#" className="block text-sm text-primary-foreground/70 transition-all duration-300 hover:text-white hover:translate-x-1">Équipements certifiés</a></li>
+          </ul>
+        </div>
+
+        {/* COLONNE 4 - Contact */}
+        <div>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Nous contacter</p>
+          <div className="space-y-3">
+            <div className="flex items-start gap-3 text-sm text-primary-foreground/70">
+              <MapPin size={16} className="mt-0.5 shrink-0 text-accent" />
+              <span>Kinshasa, République démocratique du Congo</span>
+            </div>
+            <a
+              href="mailto:contact@smartwewa.cd"
+              className="flex items-center gap-3 text-sm text-primary-foreground/70 transition-all duration-300 hover:text-white hover:translate-x-1"
+              data-testid="link-footer-email"
+            >
+              <Mail size={16} className="shrink-0 text-accent" />
+              <span>contact@smartwewa.cd</span>
+            </a>
+            <a
+              href="tel:+243812345678"
+              className="flex items-center gap-3 text-sm text-primary-foreground/70 transition-all duration-300 hover:text-white hover:translate-x-1"
+              data-testid="link-footer-phone"
+            >
+              <Phone size={16} className="shrink-0 text-accent" />
+              <span>+243 81 234 56 78</span>
+            </a>
           </div>
-          <a href="mailto:contact@smartwewa.cd" className="mb-3 block text-sm text-primary-foreground/70 hover:text-white" data-testid="link-footer-email">contact@smartwewa.cd</a>
-          <a href="tel:+243812345678" className="mb-3 block text-sm text-primary-foreground/70 hover:text-white" data-testid="link-footer-phone">+243 81 234 56 78</a>
-          {/* Logo dans le footer */}
-          <div className="mt-4">
-            <Logo inverse size="large" variant="white" />
+
+          {/* Badge de confiance */}
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary-foreground/10 bg-primary-foreground/5 px-4 py-1.5">
+            <ShieldCheck size={14} className="text-accent" />
+            <span className="text-[10px] font-bold uppercase tracking-wider text-primary-foreground/60">
+              Communauté sécurisée
+            </span>
           </div>
         </div>
       </div>
+
+      {/* ===== BAS DU FOOTER ===== */}
       <div className="border-t border-primary-foreground/10">
-        <div className="container-wide flex flex-col justify-between gap-2 py-5 text-xs text-primary-foreground/50 md:flex-row">
-          <span>© 2027 Smart Wewa. Fait à Kinshasa.</span>
-          <span>Rouler mieux commence par se préparer.</span>
+        <div className="container-wide flex flex-col items-center justify-between gap-4 py-6 text-xs text-primary-foreground/50 md:flex-row">
+          <div className="flex items-center gap-4">
+            <span>© 2027 • Kinshasa</span>
+            <span className="hidden h-4 w-px bg-primary-foreground/20 md:block" />
+            <span>Communauté motarde</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span>Rouler mieux commence par se préparer.</span>
+            <span className="h-4 w-px bg-primary-foreground/20" />
+            <a href="#" className="transition-colors hover:text-white">Mentions légales</a>
+          </div>
         </div>
       </div>
     </footer>
