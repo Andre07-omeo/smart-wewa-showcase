@@ -10,17 +10,32 @@ export const navItems = [
   { href: '/contact', label: 'Contact' },
 ];
 
-export function Logo({ inverse = false }: { inverse?: boolean }) {
+export function Logo({ 
+  inverse = false, 
+  size = 'normal',
+  variant = 'default' 
+}: { 
+  inverse?: boolean; 
+  size?: 'small' | 'normal' | 'large' | 'xlarge';
+  variant?: 'default' | 'white';
+}) {
+  const sizeClasses = {
+    small: 'h-12',
+    normal: 'h-20',
+    large: 'h-28',
+    xlarge: 'h-36'
+  };
+  
+  // Deux logos différents
+  const logoSrc = variant === 'white' ? '/images/logo4.png' : '/images/logof.png';
+  
   return (
-    <Link href="/" className="flex items-center gap-2.5 group" data-testid="link-logo">
-      <span className={`relative grid h-10 w-10 place-items-center rounded-xl ${inverse ? 'bg-accent' : 'bg-primary'} text-primary-foreground overflow-hidden`}>
-        <span className="absolute -right-3 -top-3 h-7 w-7 rounded-full border-4 border-primary-foreground/20" />
-        <span className="font-display text-lg font-bold italic">W</span>
-      </span>
-      <span className={`font-display leading-[.86] tracking-[-.06em] ${inverse ? 'text-white' : 'text-primary'}`}>
-        <span className="block text-[17px] font-bold">SMART</span>
-        <span className="block text-[17px] font-bold text-accent">WEWA</span>
-      </span>
+    <Link href="/" className="flex items-center gap-3 group" data-testid="link-logo">
+      <img 
+        src={logoSrc} 
+        alt="Smart Wewa" 
+        className={`${sizeClasses[size]} w-auto object-contain transition-transform duration-300 group-hover:scale-105`}
+      />
     </Link>
   );
 }
@@ -30,11 +45,12 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur-xl">
-      <div className="container-wide flex h-[76px] items-center justify-between">
-        <Logo />
+      <div className="container-wide flex h-[84px] items-center justify-between">
+        {/* Logo principal - version default */}
+        <Logo size="normal" variant="default" />
         <nav className="hidden items-center gap-7 md:flex" aria-label="Navigation principale">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} data-testid={`link-nav-${item.label.toLowerCase().replaceAll(' ', '-')}`} className={`relative py-2 text-[13px] font-semibold transition-colors hover:text-primary ${location === item.href ? 'text-primary' : 'text-muted-foreground'}`}>
+            <Link key={item.href} href={item.href} data-testid={`link-nav-${item.label.toLowerCase().replace(/ /g, '-')}`} className={`relative py-2 text-[13px] font-semibold transition-colors hover:text-primary ${location === item.href ? 'text-primary' : 'text-muted-foreground'}`}>
               {item.label}
               {location === item.href && <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-accent" />}
             </Link>
@@ -44,7 +60,8 @@ export function Header() {
           <a href="tel:+243812345678" className="flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-primary" data-testid="link-header-phone">
             <Phone size={14} /> +243 81 234 56 78
           </a>
-          <Link href="/contact" className="rounded-lg bg-primary px-4 py-2.5 text-xs font-bold text-primary-foreground shadow-[0_8px_20px_rgba(28,61,133,.18)] transition-transform hover:-translate-y-0.5" data-testid="link-header-contact">Parlons-nous</Link>
+          {/* Logo blanc à droite (inverse) */}
+          <Logo inverse size="normal" variant="white" />
         </div>
         <button type="button" className="grid h-10 w-10 place-items-center rounded-lg border border-border md:hidden" onClick={() => setOpen(!open)} aria-label="Ouvrir le menu" data-testid="button-menu">
           {open ? <X size={19} /> : <Menu size={19} />}
@@ -52,8 +69,11 @@ export function Header() {
       </div>
       {open && (
         <nav className="border-t border-border bg-background px-5 py-4 md:hidden" aria-label="Navigation mobile">
-          {navItems.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="block border-b border-border/60 py-3 text-sm font-semibold" data-testid={`link-mobile-${item.label.toLowerCase().replaceAll(' ', '-')}`}>{item.label}</Link>)}
-          <Link href="/contact" onClick={() => setOpen(false)} className="mt-4 block rounded-lg bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground" data-testid="link-mobile-contact">Parlons-nous</Link>
+          {navItems.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="block border-b border-border/60 py-3 text-sm font-semibold" data-testid={`link-mobile-${item.label.toLowerCase().replace(/ /g, '-')}`}>{item.label}</Link>)}
+          {/* Logo en bas du menu mobile */}
+          <div className="mt-4 flex justify-center">
+            <Logo size="large" variant="default" />
+          </div>
         </nav>
       )}
     </header>
@@ -65,7 +85,8 @@ export function Footer() {
     <footer className="bg-primary text-primary-foreground">
       <div className="container-wide grid gap-10 py-14 md:grid-cols-[1.35fr_.8fr_.8fr_1fr]">
         <div>
-          <Logo inverse />
+          {/* Logo blanc dans le footer */}
+          <Logo inverse size="xlarge" variant="white" />
           <p className="mt-5 max-w-xs text-sm leading-6 text-primary-foreground/70">La référence des motards de Kinshasa. De bons équipements, de bonnes infos, et une communauté qui veille les uns sur les autres.</p>
           <div className="mt-6 flex gap-2">
             {[{ label: 'Facebook', icon: Facebook }, { label: 'Instagram', icon: Instagram }, { label: 'YouTube', icon: Youtube }].map(({ label, icon: Icon }) => <a key={label} href="#" aria-label={label} className="grid h-9 w-9 place-items-center rounded-full border border-primary-foreground/20 transition-colors hover:bg-accent" data-testid={`link-footer-${label.toLowerCase()}`}><Icon size={15} /></a>)}
@@ -73,9 +94,25 @@ export function Footer() {
         </div>
         <div><p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Découvrir</p>{navItems.slice(1, 4).map((item) => <Link key={item.href} href={item.href} className="mb-3 block text-sm text-primary-foreground/70 hover:text-white" data-testid={`link-footer-nav-${item.label}`}>{item.label}</Link>)}</div>
         <div><p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Le terrain</p><p className="mb-3 text-sm text-primary-foreground/70">Conseils sécurité</p><p className="mb-3 text-sm text-primary-foreground/70">Points relais</p><p className="mb-3 text-sm text-primary-foreground/70">Devenir partenaire</p></div>
-        <div><p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Nous trouver</p><div className="mb-3 flex gap-2 text-sm text-primary-foreground/70"><MapPin size={15} className="mt-0.5 shrink-0 text-accent" /> Kinshasa, République démocratique du Congo</div><a href="mailto:contact@smartwewa.cd" className="mb-3 block text-sm text-primary-foreground/70 hover:text-white" data-testid="link-footer-email">contact@smartwewa.cd</a><a href="tel:+243812345678" className="block text-sm text-primary-foreground/70 hover:text-white" data-testid="link-footer-phone">+243 81 234 56 78</a></div>
+        <div>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Nous trouver</p>
+          <div className="mb-3 flex gap-2 text-sm text-primary-foreground/70">
+            <MapPin size={15} className="mt-0.5 shrink-0 text-accent" /> Kinshasa, République démocratique du Congo
+          </div>
+          <a href="mailto:contact@smartwewa.cd" className="mb-3 block text-sm text-primary-foreground/70 hover:text-white" data-testid="link-footer-email">contact@smartwewa.cd</a>
+          <a href="tel:+243812345678" className="mb-3 block text-sm text-primary-foreground/70 hover:text-white" data-testid="link-footer-phone">+243 81 234 56 78</a>
+          {/* Logo dans le footer */}
+          <div className="mt-4">
+            <Logo inverse size="large" variant="white" />
+          </div>
+        </div>
       </div>
-      <div className="border-t border-primary-foreground/10"><div className="container-wide flex flex-col justify-between gap-2 py-5 text-xs text-primary-foreground/50 md:flex-row"><span>© 2025 Smart Wewa. Fait à Kinshasa.</span><span>Rouler mieux commence par se préparer.</span></div></div>
+      <div className="border-t border-primary-foreground/10">
+        <div className="container-wide flex flex-col justify-between gap-2 py-5 text-xs text-primary-foreground/50 md:flex-row">
+          <span>© 2025 Smart Wewa. Fait à Kinshasa.</span>
+          <span>Rouler mieux commence par se préparer.</span>
+        </div>
+      </div>
     </footer>
   );
 }
@@ -93,7 +130,7 @@ export function SectionHeading({ eyebrow, title, text, align = 'left' }: { eyebr
 }
 
 export function ButtonLink({ href, children, secondary = false }: { href: string; children: ReactNode; secondary?: boolean }) {
-  return <Link href={href} className={`group inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition-all hover:-translate-y-0.5 ${secondary ? 'border border-border bg-card text-foreground hover:border-primary/40' : 'bg-primary text-primary-foreground shadow-[0_10px_24px_rgba(28,61,133,.2)] hover:bg-[#163267]'}`} data-testid={`link-cta-${href.replaceAll('/', '') || 'home'}`}>{children}<ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></Link>;
+  return <Link href={href} className={`group inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition-all hover:-translate-y-0.5 ${secondary ? 'border border-border bg-card text-foreground hover:border-primary/40' : 'bg-primary text-primary-foreground shadow-[0_10px_24px_rgba(28,61,133,.2)] hover:bg-[#163267]'}`} data-testid={`link-cta-${href.replace(/\//g, '') || 'home'}`}>{children}<ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></Link>;
 }
 
 type Slide = { image: string; kicker: string; title: string; text: string };
