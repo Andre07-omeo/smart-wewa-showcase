@@ -6,13 +6,13 @@ import { ButtonLink, Carousel, Eyebrow, SectionHeading, Shell, TrustBar } from '
 // ========== HERO SLIDES ==========
 const heroSlides = [
   {
-    image: '/images/hero-rider.jpeg',
+    image: '/images/hero-rider.png',
     kicker: 'La référence des motards de Kinshasa',
     title: 'La Route est à nous, la Sécurité est notre Priorité.',
     text: 'Des équipements certifiés, des conseils de terrain et une communauté soudée pour que chaque trajet soit un retour assuré.'
   },
   {
-    image: '/images/community-riders.jpg',
+    image: '/images/community-riders.PNG',
     kicker: 'Une communauté qui se protège',
     title: 'Smart Wewa, c\'est la garantie de rouler en confiance.',
     text: 'Retrouvez les bons plans, les rendez-vous et les réflexes qui font la différence sur les routes de Kinshasa.'
@@ -35,9 +35,14 @@ const equipment: Product[] = [
     price: '',
     category: 'Gilets',
     images: [
-      '/images/gilet-1.jpg',
-      '/images/gilet-2.jpg',
-      '/images/gilet-3.jpg'
+      '/images/gilet-1.PNG',
+      '/images/2.PNG',
+      '/images/gilet-2.PNG',
+      '/images/4.PNG',
+      '/images/gilet-3.PNG',
+      '/images/1.PNG',
+      '/images/gilet-4.PNG',
+      '/images/3.PNG'
     ],
     tone: 'bg-[#e3e7ef]'
   },
@@ -46,9 +51,8 @@ const equipment: Product[] = [
     price: '',
     category: 'Carte biométrique',
     images: [
-      '/images/carte-1.jpg',
-      '/images/carte-2.jpg',
-      '/images/carte-3.jpg'
+      '/images/carte-1.PNG',
+      '/images/Verso.PNG',
     ],
     tone: 'bg-[#eee9df]'
   },
@@ -76,7 +80,6 @@ const ProductCard = memo(function ProductCard({ item }: { item: Product }) {
     return () => clearInterval(interval);
   }, [item.images.length]);
 
-  // Générer des clés uniques pour chaque élément
   const imageKey = (idx: number) => `img-${item.title}-${idx}`;
   const dotKey = (idx: number) => `dot-${item.title}-${idx}`;
 
@@ -88,7 +91,7 @@ const ProductCard = memo(function ProductCard({ item }: { item: Product }) {
             key={imageKey(idx)}
             src={img}
             alt={`${item.title} - ${idx + 1}`}
-            className={`absolute inset-0 h-full w-full object-cover mix-blend-multiply transition-opacity duration-700 ease-in-out ${idx === currentIndex ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ease-in-out ${idx === currentIndex ? 'opacity-100' : 'opacity-0'
               }`}
             loading="lazy"
           />
@@ -194,13 +197,13 @@ export function HomePage() {
         <section className="container-wide pb-20 md:pb-28">
           <Carousel slides={[
             {
-              image: '/images/community-riders.jpg',
+              image: '/images/community-riders.PNG',
               kicker: 'Le mouvement Smart Wewa',
               title: 'La sécurité est une affaire de tous.',
               text: 'Chaque semaine, nous partageons des itinéraires sécurisés, des conseils de prévention et des rendez-vous pour renforcer la solidarité entre motards.'
             },
             {
-              image: '/images/hero-rider.jpg',
+              image: '/images/hero-rider.png',
               kicker: 'La parole du terrain',
               title: 'Les bons gestes se transmettent.',
               text: 'Un conseil donné au bon moment peut sauver une vie. C\'est pourquoi nous croyons en la force de l\'entraide.'
@@ -355,8 +358,8 @@ export function AboutPage() {
                 <span className="text-accent">la sécurité notre engagement.</span>
               </h1>
               <p className="mt-7 max-w-lg text-base leading-7 text-muted-foreground">
-                Smart Wewa est né d'une conviction : chaque motard mérite de rouler en confiance. 
-                Nous sommes une communauté qui veille, des équipements qui protègent et des réflexes 
+                Smart Wewa est né d'une conviction : chaque motard mérite de rouler en confiance.
+                Nous sommes une communauté qui veille, des équipements qui protègent et des réflexes
                 qui sauvent. Parce qu'à Kinshasa, la route se partage et la sécurité se construit ensemble.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -365,7 +368,7 @@ export function AboutPage() {
               </div>
             </div>
             <div className="relative">
-              <img src="/images/community-riders.jpg" alt="Groupe de motards Smart Wewa à Kinshasa" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+              <img src="/images/community-riders.PNG" alt="Groupe de motards Smart Wewa à Kinshasa" className="aspect-[4/3] w-full rounded-2xl object-cover" />
               <div className="absolute -bottom-5 -left-5 rounded-xl bg-accent p-5 text-white shadow-xl">
                 <p className="font-display text-3xl font-bold">2027</p>
                 <p className="mt-1 text-xs text-white/80">Smart Wewa</p>
@@ -375,19 +378,19 @@ export function AboutPage() {
         </section>
 
         <section className="container-wide grid gap-10 py-20 md:grid-cols-3 md:py-28">
-          <AboutValue 
-            number="01" 
-            title="Écouter le terrain" 
+          <AboutValue
+            number="01"
+            title="Écouter le terrain"
             text="Nos meilleures idées naissent au bord de la route, pas dans une salle de réunion. Chaque motard est une source d'inspiration."
           />
-          <AboutValue 
-            number="02" 
-            title="La fiabilité avant tout" 
+          <AboutValue
+            number="02"
+            title="La fiabilité avant tout"
             text="Nous ne recommandons que ce que nous avons testé et approuvé. Un équipement doit tenir ses promesses, un conseil doit sauver des vies."
           />
-          <AboutValue 
-            number="03" 
-            title="Avancer ensemble" 
+          <AboutValue
+            number="03"
+            title="Avancer ensemble"
             text="Un motard bien équipé devient un repère pour les autres. C'est ainsi que nous faisons grandir la sécurité sur les routes de Kinshasa."
           />
         </section>
@@ -437,7 +440,7 @@ export function ContactPage() {
               <span className="text-accent">la route est plus sûre.</span>
             </h1>
             <p className="mt-6 max-w-md text-base leading-7 text-muted-foreground">
-              Une question sur nos équipements, une suggestion pour la communauté ou un partenariat ? 
+              Une question sur nos équipements, une suggestion pour la communauté ou un partenariat ?
               Notre équipe est à votre écoute depuis Kinshasa.
             </p>
             <div className="mt-10 space-y-5">
@@ -445,62 +448,62 @@ export function ContactPage() {
               <ContactDetail icon={<Phone />} label="Téléphone" text="+243 81 234 56 78" />
               <ContactDetail icon={<Mail />} label="Email" text="contact@smartwewa.cd" />
             </div>
-            <img src="/images/contact-kinshasa.jpg" alt="Kinshasa, ville de Smart Wewa" className="mt-10 aspect-[16/8] w-full rounded-xl object-cover" />
+            <img src="/images/IMG_0342.PNG" alt="Kinshasa, ville de Smart Wewa" className="mt-10 aspect-[16/8] w-full rounded-xl object-cover" />
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_20px_50px_rgba(31,48,83,.08)] md:p-10">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-[0_20px_50px_rgba(31,48,83,.08)] md:p-6">
             {sent ? (
-              <div className="flex min-h-[450px] flex-col items-center justify-center text-center">
-                <div className="grid h-16 w-16 place-items-center rounded-full bg-[#e1eee7] text-[#25724b]">
-                  <Check size={28} />
+              <div className="flex min-h-[250px] flex-col items-center justify-center text-center">
+                <div className="grid h-12 w-12 place-items-center rounded-full bg-[#e1eee7] text-[#25724b]">
+                  <Check size={24} />
                 </div>
-                <h2 className="mt-6 font-display text-3xl font-bold tracking-[-.04em]">Message bien reçu !</h2>
-                <p className="mt-3 max-w-sm text-sm leading-6 text-muted-foreground">
-                  Merci pour votre message. Un membre de la communauté Smart Wewa vous répondra dès que possible.
+                <h2 className="mt-4 font-display text-xl font-bold tracking-[-.04em]">Message bien reçu !</h2>
+                <p className="mt-2 max-w-sm text-sm leading-5 text-muted-foreground">
+                  Merci pour votre message. Un membre de la communauté vous répondra dès que possible.
                 </p>
-                <button 
-                  type="button" 
-                  onClick={() => setSent(false)} 
-                  className="mt-7 text-sm font-bold text-primary underline underline-offset-4 hover:text-accent transition-colors" 
+                <button
+                  type="button"
+                  onClick={() => setSent(false)}
+                  className="mt-4 text-sm font-bold text-primary underline underline-offset-4 hover:text-accent transition-colors"
                   data-testid="button-contact-new"
                 >
                   Envoyer un autre message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-3">
                 <div>
-                  <label htmlFor="name" className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <label htmlFor="name" className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     Nom complet
                   </label>
-                  <input 
-                    id="name" 
-                    required 
-                    placeholder="Votre nom" 
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/10" 
-                    data-testid="input-contact-name" 
+                  <input
+                    id="name"
+                    required
+                    placeholder="Votre nom"
+                    className="w-full rounded-lg border border-input bg-background px-3.5 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                    data-testid="input-contact-name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <label htmlFor="email" className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     Email
                   </label>
-                  <input 
-                    id="email" 
-                    type="email" 
-                    required 
-                    placeholder="vous@exemple.com" 
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/10" 
-                    data-testid="input-contact-email" 
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder="vous@exemple.com"
+                    className="w-full rounded-lg border border-input bg-background px-3.5 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                    data-testid="input-contact-email"
                   />
                 </div>
                 <div>
-                  <label htmlFor="subject" className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <label htmlFor="subject" className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     Sujet
                   </label>
-                  <select 
-                    id="subject" 
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary" 
+                  <select
+                    id="subject"
+                    className="w-full rounded-lg border border-input bg-background px-3.5 py-2 text-sm outline-none focus:border-primary"
                     data-testid="select-contact-subject"
                   >
                     <option>Une question générale</option>
@@ -511,24 +514,24 @@ export function ContactPage() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="message" className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <label htmlFor="message" className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     Votre message
                   </label>
-                  <textarea 
-                    id="message" 
-                    required 
-                    rows={5} 
-                    placeholder="Partagez-nous tout..." 
-                    className="w-full resize-none rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/10" 
-                    data-testid="textarea-contact-message" 
+                  <textarea
+                    id="message"
+                    required
+                    rows={3}
+                    placeholder="Partagez-nous tout..."
+                    className="w-full resize-none rounded-lg border border-input bg-background px-3.5 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                    data-testid="textarea-contact-message"
                   />
                 </div>
-                <button 
-                  type="submit" 
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:bg-[#163267] hover:shadow-lg" 
+                <button
+                  type="submit"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-all hover:bg-[#163267] hover:shadow-lg"
                   data-testid="button-contact-submit"
                 >
-                  Envoyer le message <Send size={16} />
+                  Envoyer le message <Send size={15} />
                 </button>
               </form>
             )}
@@ -562,7 +565,7 @@ function Newsletter() {
         </div>
         {done ? (
           <p className="flex items-center gap-2 text-sm font-bold text-[#25724b]">
-c:\Users\omeon\Downloads\Moto_Gilet_Rouge_Fidele_4K (2).png          </p>
+          </p>
         ) : (
           <form onSubmit={(e) => { e.preventDefault(); setDone(true); }} className="flex w-full max-w-md gap-2">
             <input required type="email" placeholder="Votre adresse email" className="min-w-0 flex-1 rounded-lg border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary" data-testid="input-newsletter-email" />
