@@ -1,51 +1,43 @@
-import { type ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Route, Switch, Link } from 'wouter';  // ← Ajout de Link ici
+import { HomePage, EquipementsPage, AboutPage, ContactPage } from './pages/showcase';
+import { Shell } from '@/components/site';
 import { ErrorBoundary } from '@/components/error-boundary';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import NotFound from '@/pages/not-found';
-import { AboutPage, AnnoncesPage, ContactPage, EquipementsPage, HomePage } from '@/pages/showcase';
-import {
-  Route,
-  Switch,
-  useLocation,
-  Router as WouterRouter,
-} from 'wouter';
 
-const queryClient = new QueryClient();
-
-function Router() {
-  return (
-    // Keep a shared shell (sidebar, navbar) outside the boundary so it
-    // survives a page crash.
-    <RoutedErrorBoundary>
-      <Switch>
-         <Route path="/" component={HomePage} />
-         <Route path="/equipements" component={EquipementsPage} />
-         <Route path="/annonces" component={AnnoncesPage} />
-         <Route path="/a-propos" component={AboutPage} />
-         <Route path="/contact" component={ContactPage} />
-        <Route component={NotFound} />
-      </Switch>
-    </RoutedErrorBoundary>
-  );
-}
-
-function RoutedErrorBoundary({ children }: { children: ReactNode }) {
-  const [location] = useLocation();
-  return <ErrorBoundary resetKey={location}>{children}</ErrorBoundary>;
-}
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 1,
+    },
+  },
+});
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <Switch>
+          <Route path="/" component={HomePage} />
+          <Route path="/equipements" component={EquipementsPage} />
+          <Route path="/a-propos" component={AboutPage} />
+          <Route path="/contact" component={ContactPage} />
+          <Route>
+            <Shell>
+              <div className="flex min-h-[60vh] items-center justify-center">
+                <div className="text-center">
+                  <h1 className="text-6xl font-bold text-primary">404</h1>
+                  <p className="mt-4 text-xl text-muted-foreground">Page non trouvée</p>
+                  <Link href="/" className="mt-6 inline-block rounded-lg bg-primary px-6 py-3 text-white">
+                    Retour à l'accueil
+                  </Link>
+                </div>
+              </div>
+            </Shell>
+          </Route>
+        </Switch>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

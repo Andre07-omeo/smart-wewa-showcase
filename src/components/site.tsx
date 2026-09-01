@@ -5,7 +5,6 @@ import { ArrowRight, ChevronLeft, ChevronRight, Clock3, Facebook, Instagram, Map
 export const navItems = [
   { href: '/', label: 'Accueil' },
   { href: '/equipements', label: 'Équipements' },
-  { href: '/annonces', label: 'Annonces' },
   { href: '/a-propos', label: 'À propos' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -109,7 +108,7 @@ export function Footer() {
       </div>
       <div className="border-t border-primary-foreground/10">
         <div className="container-wide flex flex-col justify-between gap-2 py-5 text-xs text-primary-foreground/50 md:flex-row">
-          <span>© 2025 Smart Wewa. Fait à Kinshasa.</span>
+          <span>© 2027 Smart Wewa. Fait à Kinshasa.</span>
           <span>Rouler mieux commence par se préparer.</span>
         </div>
       </div>
