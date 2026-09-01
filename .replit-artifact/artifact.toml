@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Smart Wewa"
+description = "Une vitrine moderne pour Smart Wewa, présentant ses équipements moto, ses annonces, sa communauté et ses services avec des visuels locaux et des transitions fluides."
+version = "1.0.0"
+id = "artifacts/smart-wewa-showcase"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18709
+
+[services.development]
+run = "pnpm --filter @workspace/smart-wewa-showcase run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/smart-wewa-showcase", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/smart-wewa-showcase/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18709"
+BASE_PATH = "/"
