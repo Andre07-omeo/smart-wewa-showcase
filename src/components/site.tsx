@@ -224,8 +224,9 @@ export function Footer() {
   );
 }
 
+// ===== SHELL (fond gris uniforme) =====
 export function Shell({ children }: { children: ReactNode }) {
-  return <div className="noise min-h-[100dvh] bg-background"><Header />{children}<Footer /></div>;
+  return <div className="min-h-[100dvh] bg-gray-200"><Header />{children}<Footer /></div>;
 }
 
 export function Eyebrow({ children }: { children: ReactNode }) {

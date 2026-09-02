@@ -119,22 +119,38 @@ const ProductCard = memo(function ProductCard({ item }: { item: Product }) {
   );
 });
 
+// ========== COMPOSANT FEATURE ==========
+function Feature({ icon, title, text, className = "", iconBg = "bg-[#e6ebf5]" }: { icon: ReactNode; title: string; text: string; className?: string; iconBg?: string }) {
+  return (
+    <div className={`rounded-xl border border-border p-6 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg ${className || "bg-card"}`}>
+      <div className={`mb-8 grid h-11 w-11 place-items-center rounded-lg ${iconBg}`}>
+        {icon}
+      </div>
+      <h3 className={`font-display text-xl font-bold tracking-[-.04em] ${className?.includes("bg-[#2d3748]") ? "text-white" : ""}`}>{title}</h3>
+      <p className={`mt-3 text-sm leading-6 ${className?.includes("bg-[#2d3748]") ? "text-gray-300" : "text-muted-foreground"}`}>{text}</p>
+      <Link href="/a-propos" className={`mt-6 inline-flex items-center gap-2 text-xs font-bold ${className?.includes("bg-[#2d3748]") ? "text-white/80 hover:text-white" : "text-primary"}`} data-testid={`link-feature-${title}`}>
+        En savoir plus <ArrowRight size={14} />
+      </Link>
+    </div>
+  );
+}
 // ========== PAGE D'ACCUEIL ==========
 export function HomePage() {
   return (
     <Shell>
-      <main>
+      <main className="bg-gray-200">
         {/* HERO SECTION */}
         <section className="site-grid overflow-hidden">
           <div className="container-wide grid items-center gap-10 py-12 md:grid-cols-[.8fr_1.2fr] md:py-20">
             <div className="reveal order-2 md:order-1">
               <h1 className="font-display max-w-xl text-5xl font-bold leading-[.92] tracking-[-.065em] text-primary md:text-7xl">
-                Un motard identifié,<br />
-                <span className="text-accent">une route sécurisée.</span>
+                Un motard reconnu,<br />
+                <span className="text-accent">un citoyen protégé.</span>
               </h1>
               <p className="mt-6 max-w-md text-base leading-7 text-muted-foreground">
-                Smart Wewa, c'est la garantie de rouler en confiance. Des équipements testés,
-                une communauté vigilante et des conseils qui sauvent des vies.
+                SmartWewa est votre allié sur la route. Des équipements certifiés,
+                une communauté solidaire et des conseils avisés pour que chaque trajet
+                soit placé sous le signe de la sérénité.
               </p>
             </div>
             <div className="reveal delay-2 order-1 md:order-2">
@@ -148,32 +164,38 @@ export function HomePage() {
           <div className="grid items-end gap-8 md:grid-cols-[1fr_auto]">
             <SectionHeading
               eyebrow="Pourquoi Smart Wewa ?"
-              title="La sécurité n'est jamais un luxe. C'est une habitude."
-              text="Nous sélectionnons avec rigueur des équipements fiables et partageons des conseils pratiques pour que chaque motard rentre chez lui en toute sérénité."
+              title="La sécurité n'est pas une option, c'est notre engagement commun."
+              text="Nous vous offrons bien plus qu'un équipement : une véritable assurance pour l'esprit. Chaque produit est rigoureusement sélectionné, chaque conseil est une expérience de terrain, pour que votre seul souci soit le plaisir de la route."
             />
-            <ButtonLink href="/a-propos" secondary>Découvrir Smart Wewa</ButtonLink>
+            <ButtonLink href="/a-propos" secondary>Découvrir SmartWewa</ButtonLink>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             <Feature
-              icon={<Shield />}
-              title="Sécurité avant tout"
-              text="La carte biométrique Smart Wewa, c'est votre passeport sécurisé sur la route. Associée à notre gilet haute visibilité, elle vous protège et vous identifie en toute circonstance. Parce qu'un motard visible et reconnu est un motard protégé."
+              icon={<Shield className="text-white" />}
+              title="Votre sécurité, notre raison d'être."
+              text="La carte biométrique SmartWewa, c'est votre identité en mouvement. Couplée à notre gilet haute visibilité, elle fait de vous un acteur visible et respecté sur la voie publique. Parce qu'un motard qui se sait protégé, roule en confiance."
+              className="bg-[#2d3748] text-white"
+              iconBg="bg-[#D4A017]"
             />
             <Feature
-              icon={<PackageCheck />}
-              title="Équipement certifié"
-              text="Chez Smart Wewa, chaque équipement est choisi avec soin pour répondre aux réalités des routes de Kinshasa. La fiabilité et la sécurité sont nos seuls critères de sélection."
+              icon={<PackageCheck className="text-white" />}
+              title="La fiabilité au service de votre quotidien."
+              text="Chez SmartWewa, chaque équipement est choisi avec soin pour répondre aux réalités des routes de Kinshasa. La fiabilité et la sécurité sont nos seuls critères de sélection."
+              className="bg-[#2d3748] text-white"
+              iconBg="bg-[#D4A017]"
             />
             <Feature
-              icon={<MessageCircle />}
-              title="Communauté solidaire"
+              icon={<MessageCircle className="text-white" />}
+              title="La force d'une communauté qui veille."
               text="Des annonces utiles, des partenaires de confiance et des histoires de terrain. La force du collectif au service de votre sécurité."
+              className="bg-[#2d3748] text-white"
+              iconBg="bg-[#D4A017]"
             />
           </div>
         </section>
 
         {/* SECTION EQUIPEMENTS */}
-        <section className="bg-[#e9edf2] py-20 md:py-24">
+        <section className="bg-gray-200 py-20 md:py-24">
           <div className="container-wide grid items-center gap-12 md:grid-cols-[.75fr_1.25fr]">
             <div>
               <SectionHeading
@@ -217,40 +239,24 @@ export function HomePage() {
   );
 }
 
-// ========== COMPOSANT FEATURE ==========
-function Feature({ icon, title, text }: { icon: ReactNode; title: string; text: string }) {
-  return (
-    <div className="rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg">
-      <div className="mb-8 grid h-11 w-11 place-items-center rounded-lg bg-[#e6ebf5] text-primary">{icon}</div>
-      <h3 className="font-display text-xl font-bold tracking-[-.04em]">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p>
-      <Link href="/a-propos" className="mt-6 inline-flex items-center gap-2 text-xs font-bold text-primary" data-testid={`link-feature-${title}`}>
-        En savoir plus <ArrowRight size={14} />
-      </Link>
-    </div>
-  );
-}
-
 // ========== PAGE ÉQUIPEMENTS ==========
 export function EquipementsPage() {
   const [category, setCategory] = useState('Tous');
   const categories = ['Tous', 'Gilets', 'Carte biométrique', 'Téléphone'];
 
-  // Utiliser useMemo pour éviter les recalculs inutiles
   const visible = useMemo(() => {
     return category === 'Tous'
       ? equipment
       : equipment.filter((p) => p.category === category);
   }, [category]);
 
-  // Fonction pour changer de catégorie
   const handleCategoryChange = (selectedCategory: string) => {
     setCategory(selectedCategory);
   };
 
   return (
     <Shell>
-      <main className="site-grid">
+      <main className="site-grid bg-gray-200">
         {/* ===== SECTION TITRE ===== */}
         <div className="container-wide pt-16 md:pt-24 pb-6 md:pb-10">
           <div className="max-w-3xl mx-auto text-center reveal">
@@ -315,6 +321,7 @@ export function EquipementsPage() {
             </p>
           </div>
         </div>
+
         {/* ===== GRILLE PRODUITS ===== */}
         <div className="container-wide pb-16 md:pb-24">
           {visible.length > 0 ? (
@@ -348,21 +355,19 @@ export function EquipementsPage() {
 export function AboutPage() {
   return (
     <Shell>
-      <main>
+      <main className="bg-gray-200">
         <section className="site-grid">
           <div className="container-wide grid items-center gap-12 py-16 md:grid-cols-[.85fr_1.15fr] md:py-24">
             <div>
               <Eyebrow>Notre histoire</Eyebrow>
-              <h1 className="font-display text-5xl font-bold leading-[.94] tracking-[-.06em] text-primary md:text-7xl">
-                La route est notre terrain,<br />
-                <span className="text-accent">la sécurité notre engagement.</span>
+              <h1 className="font-display text-3xl font-bold leading-[.94] tracking-[-.06em] text-primary md:text-5xl">
+                Chaque motard est un citoyen,{' '}
+                <span className="text-accent">chaque trajet une responsabilité partagée.</span>
               </h1>
-              <p className="mt-7 max-w-lg text-base leading-7 text-muted-foreground">
-                Smart Wewa est né d'une conviction : chaque motard mérite de rouler en confiance.
-                Nous sommes une communauté qui veille, des équipements qui protègent et des réflexes
-                qui sauvent. Parce qu'à Kinshasa, la route se partage et la sécurité se construit ensemble.
+              <p className="mt-5 max-w-lg text-sm leading-6 text-muted-foreground md:text-base">
+                Smart Wewa est né d'une évidence : le motard est un acteur essentiel de la mobilité urbaine. Il mérite reconnaissance, protection et confiance. Nous sommes une communauté qui agit, des équipements qui garantissent et des connaissances qui préservent. À Kinshasa, la route est l'affaire de tous, et c'est ensemble que nous bâtissons une mobilité plus sûre et plus humaine.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap gap-3">
                 <ButtonLink href="/contact">Rejoindre la communauté</ButtonLink>
                 <ButtonLink href="/equipements" secondary>Explorer nos équipements</ButtonLink>
               </div>
@@ -371,7 +376,7 @@ export function AboutPage() {
               <img src="/images/community-riders.PNG" alt="Groupe de motards Smart Wewa à Kinshasa" className="aspect-[4/3] w-full rounded-2xl object-cover" />
               <div className="absolute -bottom-5 -left-5 rounded-xl bg-accent p-5 text-white shadow-xl">
                 <p className="font-display text-3xl font-bold">2027</p>
-                <p className="mt-1 text-xs text-white/80">Smart Wewa</p>
+                <p className="mt-1 text-xs text-white/80">SmartWewa</p>
               </div>
             </div>
           </div>
@@ -396,7 +401,7 @@ export function AboutPage() {
         </section>
 
         {/* ===== SECTION NOTRE PROMESSE ===== */}
-        <section className="bg-background py-20 border-t border-border">
+        <section className="bg-gray-200 py-20 border-t border-border">
           <div className="container-wide grid items-center gap-10 md:grid-cols-[1fr_auto]">
             <div>
               <Eyebrow>Notre promesse</Eyebrow>
@@ -424,6 +429,7 @@ function AboutValue({ number, title, text }: { number: string; title: string; te
     </div>
   );
 }
+
 // ========== PAGE CONTACT ==========
 export function ContactPage() {
   const [sent, setSent] = useState(false);
@@ -431,7 +437,7 @@ export function ContactPage() {
 
   return (
     <Shell>
-      <main className="site-grid">
+      <main className="site-grid bg-gray-200">
         <div className="container-wide grid gap-12 py-16 md:grid-cols-[.8fr_1.2fr] md:py-24">
           <div>
             <Eyebrow>On est à votre écoute</Eyebrow>
@@ -558,18 +564,19 @@ function ContactDetail({ icon, label, text }: { icon: ReactNode; label: string; 
 function Newsletter() {
   const [done, setDone] = useState(false);
   return (
-    <section className="bg-[#e9edf2]">
+    <section className="bg-gray-200">
       <div className="container-wide flex flex-col justify-between gap-7 py-12 md:flex-row md:items-center">
         <div>
           <h2 className="font-display text-2xl font-bold tracking-[-.04em] md:text-3xl">Les bons réflexes, directement dans votre boîte.</h2>
         </div>
         {done ? (
           <p className="flex items-center gap-2 text-sm font-bold text-[#25724b]">
+            ✅ Inscrit !
           </p>
         ) : (
           <form onSubmit={(e) => { e.preventDefault(); setDone(true); }} className="flex w-full max-w-md gap-2">
-            <input required type="email" placeholder="Votre adresse email" className="min-w-0 flex-1 rounded-lg border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary" data-testid="input-newsletter-email" />
-            <button type="submit" className="rounded-lg bg-accent px-4 py-3 text-sm font-bold text-white" data-testid="button-newsletter-submit">S'inscrire</button>
+            <input required type="email" placeholder="Votre adresse email" className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-primary" data-testid="input-newsletter-email" />
+            <button type="submit" className="rounded-lg bg-accent px-4 py-3 text-sm font-bold text-white hover:bg-accent/90 transition-colors" data-testid="button-newsletter-submit">S'inscrire</button>
           </form>
         )}
       </div>
