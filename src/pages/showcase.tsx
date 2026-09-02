@@ -1,6 +1,25 @@
 import { type FormEvent, type ReactNode, useEffect, useState, useMemo, memo } from 'react';
 import { Link } from 'wouter';
-import { ArrowRight, Check, Mail, MapPin, MessageCircle, PackageCheck, Phone, Send, Shield, SlidersHorizontal } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Check, 
+  Mail, 
+  MapPin, 
+  MessageCircle, 
+  PackageCheck, 
+  Phone, 
+  Send, 
+  Shield, 
+  SlidersHorizontal,
+  PenTool,
+  Printer,
+  Laptop,
+  Package,
+  Award,
+  Truck,
+  Users,
+  Star
+} from 'lucide-react';
 import { ButtonLink, Carousel, Eyebrow, SectionHeading, Shell, TrustBar } from '@/components/site';
 
 // ========== HERO SLIDES ==========
@@ -28,7 +47,7 @@ type Product = {
   tone: string
 };
 
-// ========== DONNÉES AVEC 3 IMAGES PAR PRODUIT ==========
+// ========== DONNÉES PRODUITS ==========
 const equipment: Product[] = [
   {
     title: 'Gilets',
@@ -69,7 +88,7 @@ const equipment: Product[] = [
   },
 ];
 
-// ========== COMPOSANT PRODUCT CARD AVEC CARROUSEL ==========
+// ========== COMPOSANT PRODUCT CARD ==========
 const ProductCard = memo(function ProductCard({ item }: { item: Product }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -91,8 +110,9 @@ const ProductCard = memo(function ProductCard({ item }: { item: Product }) {
             key={imageKey(idx)}
             src={img}
             alt={`${item.title} - ${idx + 1}`}
-            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ease-in-out ${idx === currentIndex ? 'opacity-100' : 'opacity-0'
-              }`}
+            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ease-in-out ${
+              idx === currentIndex ? 'opacity-100' : 'opacity-0'
+            }`}
             loading="lazy"
           />
         ))}
@@ -101,8 +121,9 @@ const ProductCard = memo(function ProductCard({ item }: { item: Product }) {
           {item.images.map((_, idx) => (
             <span
               key={dotKey(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-4 bg-primary' : 'w-1.5 bg-primary/40'
-                }`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                idx === currentIndex ? 'w-4 bg-primary' : 'w-1.5 bg-primary/40'
+              }`}
             />
           ))}
         </div>
@@ -134,6 +155,7 @@ function Feature({ icon, title, text, className = "", iconBg = "bg-[#e6ebf5]" }:
     </div>
   );
 }
+
 // ========== PAGE D'ACCUEIL ==========
 export function HomePage() {
   return (
@@ -152,6 +174,25 @@ export function HomePage() {
                 une communauté solidaire et des conseils avisés pour que chaque trajet
                 soit placé sous le signe de la sérénité.
               </p>
+              {/* ===== BOUTONS PRÉ-INSCRIPTION & INSCRIPTION ===== */}
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a 
+                  href="https://forms.gle/votre-lien-preinscription" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#D4A017] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#b8890f] hover:shadow-lg hover:-translate-y-1"
+                >
+                  Pré-inscription <ArrowRight size={16} />
+                </a>
+                <a 
+                  href="https://votre-site-externe.com/inscription" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#2d3748] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#1a202c] hover:shadow-lg hover:-translate-y-1"
+                >
+                  S'inscrire <ArrowRight size={16} />
+                </a>
+              </div>
             </div>
             <div className="reveal delay-2 order-1 md:order-2">
               <Carousel slides={heroSlides} />
@@ -241,19 +282,6 @@ export function HomePage() {
 
 // ========== PAGE ÉQUIPEMENTS ==========
 export function EquipementsPage() {
-  const [category, setCategory] = useState('Tous');
-  const categories = ['Tous', 'Gilets', 'Carte biométrique', 'Téléphone'];
-
-  const visible = useMemo(() => {
-    return category === 'Tous'
-      ? equipment
-      : equipment.filter((p) => p.category === category);
-  }, [category]);
-
-  const handleCategoryChange = (selectedCategory: string) => {
-    setCategory(selectedCategory);
-  };
-
   return (
     <Shell>
       <main className="site-grid bg-gray-200">
@@ -266,9 +294,9 @@ export function EquipementsPage() {
               <span className="h-px w-12 bg-accent/30" />
             </div>
 
-            <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-[-.06em] text-primary md:text-7xl">
-              Bien équipé, <br className="hidden sm:block" />
-              <span className="text-accent">mieux protégé.</span>
+            <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-[-.06em] text-primary md:text-6xl">
+              De la conception <br className="hidden sm:block" />
+              <span className="text-accent">à votre sécurité.</span>
             </h1>
 
             <div className="mt-4 flex justify-center">
@@ -276,75 +304,172 @@ export function EquipementsPage() {
             </div>
 
             <p className="mt-6 max-w-2xl mx-auto text-base leading-7 text-muted-foreground">
-              Découvrez notre sélection d'équipements pour rouler avec confiance, que ce soit pour le travail ou le plaisir.
+              Découvrez les coulisses de Smart Wewa étape par étape : de la conception de nos équipements 
+              jusqu'à leur livraison finale.
             </p>
           </div>
         </div>
 
-        {/* ===== FILTRES / CATÉGORIES (NON CLIQUABLES) ===== */}
-        <div className="container-wide pb-6 md:pb-8">
-          <div className="flex flex-wrap justify-center gap-2 overflow-x-auto pb-2">
-            {categories.map((item) => {
-              const count = item === 'Tous'
-                ? equipment.length
-                : equipment.filter(p => p.category === item).length;
-
-              const isActive = category === item;
-
-              return (
-                <span
-                  key={item}
-                  className={`whitespace-nowrap rounded-full border px-5 py-2.5 text-xs font-bold cursor-default select-none transition-all duration-200 ${isActive
-                    ? 'border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20'
-                    : 'border-border bg-card text-muted-foreground/60'
-                    }`}
-                  data-testid={`button-category-${item}`}
-                >
-                  {item}
-                  <span className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[9px] ${isActive
-                    ? 'bg-primary-foreground/20 text-primary-foreground'
-                    : 'bg-muted text-muted-foreground'
-                    }`}>
-                    {count}
-                  </span>
-                </span>
-              );
-            })}
+        {/* ===== ÉTAPE 1 : CONCEPTION & CONFECTION ===== */}
+        <div className="container-wide pb-16">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="rounded-lg bg-[#D4A017] p-2">
+              <PenTool className="h-5 w-5 text-white" />
+            </div>
+            <span className="inline-block rounded-full bg-[#D4A017] px-3 py-1 text-xs font-bold text-white">
+              Étape 1
+            </span>
+            <h2 className="font-display text-2xl font-bold text-[#2d3748]">Conception & Confection</h2>
           </div>
-
-          <div className="mt-4 text-center">
-            <p className="text-xs text-muted-foreground">
-              Affichage de <span className="font-bold text-primary">{visible.length}</span> équipement{visible.length > 1 ? 's' : ''}
-              {category !== 'Tous' && (
-                <span> dans la catégorie <span className="font-bold text-accent">{category}</span></span>
-              )}
-            </p>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/conception-1.jpg" alt="Conception" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/conception-2.jpg" alt="Confection" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/conception-3.jpg" alt="Modèles" className="h-full w-full object-cover" />
+            </div>
           </div>
         </div>
 
-        {/* ===== GRILLE PRODUITS ===== */}
+        {/* ===== ÉTAPE 2 : PRODUCTION & ATELIER ===== */}
+        <div className="container-wide pb-16">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="rounded-lg bg-[#D4A017] p-2">
+              <Printer className="h-5 w-5 text-white" />
+            </div>
+            <span className="inline-block rounded-full bg-[#D4A017] px-3 py-1 text-xs font-bold text-white">
+              Étape 2
+            </span>
+            <h2 className="font-display text-2xl font-bold text-[#2d3748]">Production & Atelier</h2>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/production-1.jpg" alt="Machine impression" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/production-2.jpg" alt="Atelier" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/production-3.jpg" alt="Contrôle qualité" className="h-full w-full object-cover" />
+            </div>
+          </div>
+        </div>
+
+        {/* ===== ÉTAPE 3 : ÉQUIPEMENT DE TERRAIN (10 PHOTOS) ===== */}
+        <div className="container-wide pb-16">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="rounded-lg bg-[#D4A017] p-2">
+              <Laptop className="h-5 w-5 text-white" />
+            </div>
+            <span className="inline-block rounded-full bg-[#D4A017] px-3 py-1 text-xs font-bold text-white">
+              Étape 3
+            </span>
+            <h2 className="font-display text-2xl font-bold text-[#2d3748]">Équipement de Terrain</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-1.jpg" alt="Téléphone" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-2.jpg" alt="Ordinateur" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-3.jpg" alt="Capteur empreinte" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-4.jpg" alt="Caméra" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-5.jpg" alt="Imprimante" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-6.jpg" alt="Scanner" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-7.jpg" alt="Tablette" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-8.jpg" alt="Drone" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-9.jpg" alt="GPS" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
+              <img src="/images/terrain-10.jpg" alt="Kit sécurité" className="h-full w-full object-cover" />
+            </div>
+          </div>
+        </div>
+
+        {/* ===== ÉTAPE 4 : PRODUITS FINIS ===== */}
+        <div className="container-wide pb-16">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="rounded-lg bg-[#D4A017] p-2">
+              <Package className="h-5 w-5 text-white" />
+            </div>
+            <span className="inline-block rounded-full bg-[#D4A017] px-3 py-1 text-xs font-bold text-white">
+              Étape 4
+            </span>
+            <h2 className="font-display text-2xl font-bold text-[#2d3748]">Produits Finis</h2>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/produits-1.jpg" alt="Autocollants" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/produits-2.jpg" alt="Gilets" className="h-full w-full object-cover" />
+            </div>
+            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
+              <img src="/images/produits-3.jpg" alt="Cartes biométriques" className="h-full w-full object-cover" />
+            </div>
+          </div>
+        </div>
+
+        {/* ===== SECTION STATS ===== */}
+        <div className="container-wide pb-8">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="rounded-xl bg-[#2d3748] p-6 text-center text-white transition-all hover:scale-105 hover:shadow-xl">
+              <p className="font-display text-3xl font-bold text-[#D4A017]">4</p>
+              <p className="mt-1 text-xs font-bold uppercase tracking-wider text-gray-400">Étapes de production</p>
+            </div>
+            <div className="rounded-xl bg-[#2d3748] p-6 text-center text-white transition-all hover:scale-105 hover:shadow-xl">
+              <p className="font-display text-3xl font-bold text-[#D4A017]">100%</p>
+              <p className="mt-1 text-xs font-bold uppercase tracking-wider text-gray-400">Qualité certifiée</p>
+            </div>
+            <div className="rounded-xl bg-[#2d3748] p-6 text-center text-white transition-all hover:scale-105 hover:shadow-xl">
+              <p className="font-display text-3xl font-bold text-[#D4A017]">2027</p>
+              <p className="mt-1 text-xs font-bold uppercase tracking-wider text-gray-400">L'année Smart Wewa</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ===== SECTION APPEL À L'ACTION ===== */}
         <div className="container-wide pb-16 md:pb-24">
-          {visible.length > 0 ? (
-            <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-              {visible.map((item) => (
-                <ProductCard key={item.title} item={item} />
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-xl border-2 border-dashed border-border bg-card/50 p-16 text-center transition-all hover:border-primary/30">
-              <SlidersHorizontal className="mx-auto h-12 w-12 text-muted-foreground/50" />
-              <h3 className="mt-4 font-display text-xl font-bold text-foreground">Aucun équipement dans cette catégorie</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Essayez une autre catégorie ou revenez plus tard pour découvrir nos nouveautés.
-              </p>
-              <button
-                onClick={() => handleCategoryChange('Tous')}
-                className="mt-4 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-primary/90"
+          <div className="rounded-2xl bg-gradient-to-r from-[#2d3748] to-[#1a202c] p-8 md:p-12 text-center">
+            <h2 className="font-display text-2xl font-bold text-white md:text-3xl">
+              Prêt à rejoindre la révolution Smart Wewa ?
+            </h2>
+            <p className="mt-3 text-gray-300 max-w-2xl mx-auto">
+              Équipez-vous avec des produits conçus pour les motards de Kinshasa, 
+              par des motards de Kinshasa.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link 
+                href="/contact" 
+                className="inline-flex items-center gap-2 rounded-lg bg-[#D4A017] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#b8890f] hover:shadow-lg hover:-translate-y-1"
               >
-                Voir tous les équipements
-              </button>
+                Commander maintenant <ArrowRight size={16} />
+              </Link>
+              <Link 
+                href="/a-propos" 
+                className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:-translate-y-1"
+              >
+                En savoir plus
+              </Link>
             </div>
-          )}
+          </div>
         </div>
       </main>
     </Shell>
