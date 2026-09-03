@@ -1,15 +1,15 @@
 import { type FormEvent, type ReactNode, useEffect, useState, useMemo, memo } from 'react';
 import { Link } from 'wouter';
-import { 
-  ArrowRight, 
-  Check, 
-  Mail, 
-  MapPin, 
-  MessageCircle, 
-  PackageCheck, 
-  Phone, 
-  Send, 
-  Shield, 
+import {
+  ArrowRight,
+  Check,
+  Mail,
+  MapPin,
+  MessageCircle,
+  PackageCheck,
+  Phone,
+  Send,
+  Shield,
   SlidersHorizontal,
   PenTool,
   Printer,
@@ -110,9 +110,8 @@ const ProductCard = memo(function ProductCard({ item }: { item: Product }) {
             key={imageKey(idx)}
             src={img}
             alt={`${item.title} - ${idx + 1}`}
-            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ease-in-out ${
-              idx === currentIndex ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ease-in-out ${idx === currentIndex ? 'opacity-100' : 'opacity-0'
+              }`}
             loading="lazy"
           />
         ))}
@@ -121,9 +120,8 @@ const ProductCard = memo(function ProductCard({ item }: { item: Product }) {
           {item.images.map((_, idx) => (
             <span
               key={dotKey(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                idx === currentIndex ? 'w-4 bg-primary' : 'w-1.5 bg-primary/40'
-              }`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-4 bg-primary' : 'w-1.5 bg-primary/40'
+                }`}
             />
           ))}
         </div>
@@ -176,16 +174,16 @@ export function HomePage() {
               </p>
               {/* ===== BOUTONS PRÉ-INSCRIPTION & INSCRIPTION ===== */}
               <div className="mt-8 flex flex-wrap gap-4">
-                <a 
-                  href="https://forms.gle/votre-lien-preinscription" 
+                <a
+                  href="https://forms.gle/votre-lien-preinscription"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-lg bg-[#D4A017] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#b8890f] hover:shadow-lg hover:-translate-y-1"
                 >
                   Pré-inscription <ArrowRight size={16} />
                 </a>
-                <a 
-                  href="https://votre-site-externe.com/inscription" 
+                <a
+                  href="https://votre-site-externe.com/inscription"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-lg bg-[#2d3748] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#1a202c] hover:shadow-lg hover:-translate-y-1"
@@ -304,7 +302,7 @@ export function EquipementsPage() {
             </div>
 
             <p className="mt-6 max-w-2xl mx-auto text-base leading-7 text-muted-foreground">
-              Découvrez les coulisses de Smart Wewa étape par étape : de la conception de nos équipements 
+              Découvrez les coulisses de Smart Wewa étape par étape : de la conception de nos équipements
               jusqu'à leur livraison finale.
             </p>
           </div>
@@ -322,14 +320,14 @@ export function EquipementsPage() {
             <h2 className="font-display text-2xl font-bold text-[#2d3748]">Conception & Confection</h2>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/conception-1.jpg" alt="Conception" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/conception-1.PNG" alt="Conception" className="absolute inset-0 h-full w-full object-cover" />
             </div>
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/conception-2.jpg" alt="Confection" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/conception-2.jpg" alt="Confection" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/conception-3.jpg" alt="Modèles" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/conception-3.jpg" alt="Modèles" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
           </div>
         </div>
@@ -346,14 +344,14 @@ export function EquipementsPage() {
             <h2 className="font-display text-2xl font-bold text-[#2d3748]">Production & Atelier</h2>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/production-1.jpg" alt="Machine impression" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/production-1.jpg" alt="Machine impression" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/production-2.jpg" alt="Atelier" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/production-2.jpg" alt="Atelier" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/production-3.jpg" alt="Contrôle qualité" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/production-3.jpg" alt="Contrôle qualité" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
           </div>
         </div>
@@ -370,36 +368,27 @@ export function EquipementsPage() {
             <h2 className="font-display text-2xl font-bold text-[#2d3748]">Équipement de Terrain</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-1.PNG" alt="Téléphone" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
+              <img src="/images/terrain-1.PNG" alt="Téléphone" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-2.PNG" alt="Ordinateur" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
+              <img src="/images/terrain-2.PNG" alt="Ordinateur" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-3.PNG" alt="Capteur empreinte" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
+              <img src="/images/terrain-3.PNG" alt="Capteur empreinte" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-4.PNG" alt="Caméra" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
+              <img src="/images/terrain-4.PNG" alt="Caméra" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-5.jpg" alt="Imprimante" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
+              <img src="/images/terrain-5.jpg" alt="Imprimante" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-6.jpg" alt="Scanner" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
+              <img src="/images/terrain-6.jpg" alt="Scanner" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-7.jpg" alt="Tablette" className="h-full w-full object-cover" />
-            </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-8.jpg" alt="Drone" className="h-full w-full object-cover" />
-            </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-9.jpg" alt="GPS" className="h-full w-full object-cover" />
-            </div>
-            <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-10.jpg" alt="Kit sécurité" className="h-full w-full object-cover" />
-            </div>
+            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
+              <img src="/images/terrain-7.jpg" alt="Tablette" className="absolute inset-0 h-full w-full object-contain p-2" />
+          </div>  
           </div>
         </div>
 
@@ -415,14 +404,14 @@ export function EquipementsPage() {
             <h2 className="font-display text-2xl font-bold text-[#2d3748]">Produits Finis</h2>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/produits-1.jpg" alt="Autocollants" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/gilet-4.PNG" alt="Gilets" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/produits-2.jpg" alt="Gilets" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/gilet-4.PNG" alt="Autocollants" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="rounded-xl overflow-hidden h-72 md:h-96 bg-gray-100">
-              <img src="/images/produits-3.jpg" alt="Cartes biométriques" className="h-full w-full object-cover" />
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
+              <img src="/images/carte-1.PNG" alt="Cartes biométriques" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
           </div>
         </div>
@@ -452,18 +441,18 @@ export function EquipementsPage() {
               Prêt à rejoindre la révolution Smart Wewa ?
             </h2>
             <p className="mt-3 text-gray-300 max-w-2xl mx-auto">
-              Équipez-vous avec des produits conçus pour les motards de Kinshasa, 
+              Équipez-vous avec des produits conçus pour les motards de Kinshasa,
               par des motards de Kinshasa.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="inline-flex items-center gap-2 rounded-lg bg-[#D4A017] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#b8890f] hover:shadow-lg hover:-translate-y-1"
               >
                 Commander maintenant <ArrowRight size={16} />
               </Link>
-              <Link 
-                href="/a-propos" 
+              <Link
+                href="/a-propos"
                 className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-white/20 hover:-translate-y-1"
               >
                 En savoir plus
@@ -475,7 +464,6 @@ export function EquipementsPage() {
     </Shell>
   );
 }
-
 // ========== PAGE À PROPOS ==========
 export function AboutPage() {
   return (
