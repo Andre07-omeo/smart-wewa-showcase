@@ -371,16 +371,16 @@ export function EquipementsPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-1.jpg" alt="Téléphone" className="h-full w-full object-cover" />
+              <img src="/images/terrain-1.PNG" alt="Téléphone" className="h-full w-full object-cover" />
             </div>
             <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-2.jpg" alt="Ordinateur" className="h-full w-full object-cover" />
+              <img src="/images/terrain-2.PNG" alt="Ordinateur" className="h-full w-full object-cover" />
             </div>
             <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-3.jpg" alt="Capteur empreinte" className="h-full w-full object-cover" />
+              <img src="/images/terrain-3.PNG" alt="Capteur empreinte" className="h-full w-full object-cover" />
             </div>
             <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
-              <img src="/images/terrain-4.jpg" alt="Caméra" className="h-full w-full object-cover" />
+              <img src="/images/terrain-4.PNG" alt="Caméra" className="h-full w-full object-cover" />
             </div>
             <div className="rounded-xl overflow-hidden h-48 md:h-56 bg-gray-100">
               <img src="/images/terrain-5.jpg" alt="Imprimante" className="h-full w-full object-cover" />
