@@ -75,17 +75,7 @@ const equipment: Product[] = [
     ],
     tone: 'bg-[#eee9df]'
   },
-  {
-    title: 'Téléphone',
-    price: '',
-    category: 'Téléphone',
-    images: [
-      '/images/telephone-1.jpg',
-      '/images/telephone-2.jpg',
-      '/images/telephone-3.jpg'
-    ],
-    tone: 'bg-[#dce5e4]'
-  },
+ 
 ];
 
 // ========== COMPOSANT PRODUCT CARD ==========
@@ -308,7 +298,7 @@ export function EquipementsPage() {
           </div>
         </div>
 
-        {/* ===== ÉTAPE 1 : CONCEPTION & CONFECTION ===== */}
+        {/* ===== ÉTAPE 1 : CONCEPTION & CONFECTION ===== 
         <div className="container-wide pb-16">
           <div className="flex items-center gap-4 mb-4">
             <div className="rounded-lg bg-[#D4A017] p-2">
@@ -331,8 +321,8 @@ export function EquipementsPage() {
             </div>
           </div>
         </div>
-
-        {/* ===== ÉTAPE 2 : PRODUCTION & ATELIER ===== */}
+*/}
+        {/* ===== ÉTAPE 2 : PRODUCTION & ATELIER =====
         <div className="container-wide pb-16">
           <div className="flex items-center gap-4 mb-4">
             <div className="rounded-lg bg-[#D4A017] p-2">
@@ -354,7 +344,7 @@ export function EquipementsPage() {
               <img src="/images/production-3.jpg" alt="Contrôle qualité" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* ===== ÉTAPE 3 : ÉQUIPEMENT DE TERRAIN (10 PHOTOS) ===== */}
         <div className="container-wide pb-16">
@@ -368,9 +358,7 @@ export function EquipementsPage() {
             <h2 className="font-display text-2xl font-bold text-[#2d3748]">Équipement de Terrain</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
-              <img src="/images/terrain-1.PNG" alt="Téléphone" className="absolute inset-0 h-full w-full object-contain p-2" />
-            </div>
+            
             <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
               <img src="/images/terrain-2.PNG" alt="Ordinateur" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
@@ -380,15 +368,7 @@ export function EquipementsPage() {
             <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
               <img src="/images/terrain-4.PNG" alt="Caméra" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
-            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
-              <img src="/images/terrain-5.jpg" alt="Imprimante" className="absolute inset-0 h-full w-full object-contain p-2" />
-            </div>
-            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
-              <img src="/images/terrain-6.jpg" alt="Scanner" className="absolute inset-0 h-full w-full object-contain p-2" />
-            </div>
-            <div className="relative rounded-xl overflow-hidden aspect-square bg-gray-100">
-              <img src="/images/terrain-7.jpg" alt="Tablette" className="absolute inset-0 h-full w-full object-contain p-2" />
-          </div>  
+            
           </div>
         </div>
 
@@ -408,7 +388,7 @@ export function EquipementsPage() {
               <img src="/images/gilet-4.PNG" alt="Gilets" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
             <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
-              <img src="/images/gilet-4.PNG" alt="Autocollants" className="absolute inset-0 h-full w-full object-contain p-2" />
+              <img src="/images/autocollant.PNG" alt="Autocollants" className="absolute inset-0 h-full w-full object-contain p-2" />
             </div>
             <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-100">
               <img src="/images/carte-1.PNG" alt="Cartes biométriques" className="absolute inset-0 h-full w-full object-contain p-2" />
