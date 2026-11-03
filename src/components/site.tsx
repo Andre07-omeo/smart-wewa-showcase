@@ -3,6 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { ArrowRight, ChevronLeft, ChevronRight, Clock3, Facebook, Instagram, MapPin, Menu, Phone, Play, Search, ShieldCheck, Sparkles, Star, X, Youtube, Mail } from 'lucide-react';
 export const navItems = [
   { href: '/', label: 'Accueil' },
+  { href: '/processus-enregistrement', label: 'Processus d’enregistrement' },
   { href: '/equipements', label: 'Équipements' },
   { href: '/a-propos', label: 'À propos' },
   { href: '/contact', label: 'Contact' },
@@ -47,16 +48,16 @@ export function Header() {
         {/* Logo principal - version default */}
         <Logo size="normal" variant="default" />
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Navigation principale">
+        <nav className="hidden items-center gap-5 xl:flex" aria-label="Navigation principale">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} data-testid={`link-nav-${item.label.toLowerCase().replace(/ /g, '-')}`} className={`relative py-2 text-[13px] font-semibold transition-colors hover:text-primary ${location === item.href ? 'text-primary' : 'text-muted-foreground'}`}>
+            <Link key={item.href} href={item.href} aria-current={location === item.href ? 'page' : undefined} data-testid={`link-nav-${item.label.toLowerCase().replace(/ /g, '-')}`} className={`relative whitespace-nowrap py-2 text-[13px] font-semibold transition-colors hover:text-primary ${location === item.href ? 'text-primary' : 'text-muted-foreground'}`}>
               {item.label}
               {location === item.href && <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-accent" />}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <a href="tel:+243812345678" className="flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-primary" data-testid="link-header-phone">
             <Phone size={14} /> +243 81 234 56 78
           </a>
@@ -73,15 +74,15 @@ export function Header() {
           </a>
         </div>
 
-        <button type="button" className="grid h-10 w-10 place-items-center rounded-lg border border-border md:hidden" onClick={() => setOpen(!open)} aria-label="Ouvrir le menu" data-testid="button-menu">
+        <button type="button" className="grid h-10 w-10 place-items-center rounded-lg border border-border xl:hidden" onClick={() => setOpen(!open)} aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'} aria-expanded={open} aria-controls="mobile-menu" data-testid="button-menu">
           {open ? <X size={19} /> : <Menu size={19} />}
         </button>
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-background px-5 py-4 md:hidden" aria-label="Navigation mobile">
+        <nav id="mobile-menu" className="border-t border-border bg-background px-5 py-4 xl:hidden" aria-label="Navigation mobile">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="block border-b border-border/60 py-3 text-sm font-semibold" data-testid={`link-mobile-${item.label.toLowerCase().replace(/ /g, '-')}`}>
+            <Link key={item.href} href={item.href} onClick={() => setOpen(false)} aria-current={location === item.href ? 'page' : undefined} className={`block border-b border-border/60 py-3 text-sm font-semibold ${location === item.href ? 'text-primary' : ''}`} data-testid={`link-mobile-${item.label.toLowerCase().replace(/ /g, '-')}`}>
               {item.label}
             </Link>
           ))}
@@ -144,7 +145,7 @@ export function Footer() {
         <div>
           <p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-accent">Découvrir</p>
           <ul className="space-y-2.5">
-            {navItems.slice(1, 4).map((item) => (
+            {navItems.slice(1).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}

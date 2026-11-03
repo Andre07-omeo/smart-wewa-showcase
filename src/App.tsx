@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Link } from 'wouter';  // ← Ajout de Link ici
 import { HomePage, EquipementsPage, AboutPage, ContactPage } from './pages/showcase';
+import { RegistrationProcessPage } from './pages/registration-process';
 import { Shell } from '@/components/site';
 import { ErrorBoundary } from '@/components/error-boundary';
 
@@ -19,6 +20,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Switch>
           <Route path="/" component={HomePage} />
+          <Route path="/processus-enregistrement" component={RegistrationProcessPage} />
           <Route path="/equipements" component={EquipementsPage} />
           <Route path="/a-propos" component={AboutPage} />
           <Route path="/contact" component={ContactPage} />
