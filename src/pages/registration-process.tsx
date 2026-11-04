@@ -93,7 +93,7 @@ const steps: readonly ProcessStep[] = [
     id: 'etape-5',
     number: 5,
     title: 'Impression de la carte biométrique',
-    image: `${imageRoot}etape-5.webp`,
+    image: `${imageRoot}carte1 (1).jpeg`,
     alt: 'Impression de la carte biométrique',
     action:
       'La carte biométrique du conducteur est émise et imprimée. Elle contient sa photo, son numéro d’identification unique et son QR code.',
@@ -108,7 +108,7 @@ const steps: readonly ProcessStep[] = [
     id: 'etape-6',
     number: 6,
     title: 'Finalisation et livraison du kit complet',
-    image: `${imageRoot}etape-6.webp`,
+    image: `${imageRoot}carte1 (2).jpeg`,
     alt: 'Livraison du kit complet : gilet et carte biométrique',
     action:
       'Le motocycliste reçoit officiellement son gilet numéroté et sa carte biométrique. Le dossier est clôturé et l’identification Smart Wewa est activée.',
